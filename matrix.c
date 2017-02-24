@@ -12,6 +12,16 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
+  int r, c;
+
+  printf("\n");
+  for(r=0;r<m->rows;r++){
+    for(c=0;c<m->cols;c++){
+      printf("%lf ", m->m[r][c]);
+    }
+    printf("\n");
+  }
+  printf("\n");
 }
 
 /*-------------- void ident() --------------
@@ -32,6 +42,14 @@ Returns:
 multiply each element of m by x
 */
 void scalar_mult(double x, struct matrix *m) {
+  int r, c;
+
+  for(r=0;r<m->rows;r++){
+    for(c=0;c<m->cols;c++){
+      m->m[r][c] *= x;
+    }
+  }
+
 }
 
 
@@ -43,6 +61,30 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+
+  int r, c;
+  int i, x;
+  int sum = 0;
+  double **tmp;
+  
+  tmp = (double **)malloc(a->rows * sizeof(double *));
+  for (i=0;i<a->rows;i++) {
+      tmp[i]=(double *)malloc(b->cols * sizeof(double));
+  };
+  
+  for(r=0;r<a->rows;r++){
+    for(c=0;c<b->cols;c++){
+      for(x=0;x<4;x++){
+	sum += a->m[r][x] * b->m[x][c];
+	printf("%d ", sum);
+      }
+      tmp[r][c] = sum;
+      sum = 0;
+      printf("%d\n", sum);
+    }
+  }
+  b->m=tmp;
+
 }
 
 
@@ -67,7 +109,7 @@ struct matrix *new_matrix(int rows, int cols) {
   tmp = (double **)malloc(rows * sizeof(double *));
   for (i=0;i<rows;i++) {
       tmp[i]=(double *)malloc(cols * sizeof(double));
-    }
+  }
 
   m=(struct matrix *)malloc(sizeof(struct matrix));
   m->m=tmp;
