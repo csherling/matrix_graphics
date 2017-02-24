@@ -31,6 +31,19 @@ Returns:
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  int r, c;
+
+  for(r=0;r<m->rows;r++){
+    for(c=0;c<m->cols;c++){
+      if(r != c){
+	m->m[r][c] = 0;
+      }
+      else{
+	m->m[r][c] = 1;
+      }
+    }
+  }
+
 }
 
 
@@ -76,11 +89,9 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
     for(c=0;c<b->cols;c++){
       for(x=0;x<4;x++){
 	sum += a->m[r][x] * b->m[x][c];
-	printf("%d ", sum);
       }
       tmp[r][c] = sum;
       sum = 0;
-      printf("%d\n", sum);
     }
   }
   b->m=tmp;

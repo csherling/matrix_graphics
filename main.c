@@ -11,9 +11,11 @@ int main() {
 
   screen s;
   struct matrix *i;
+  struct matrix *iden;
   struct matrix *edges;
 
   i = new_matrix(4,4);
+  iden = new_matrix(4,4);
   edges = new_matrix(4, 4);
 
   int r, c;
@@ -24,6 +26,8 @@ int main() {
       edges->m[r][c] = r * c;
     }
   }
+  ident(iden);
+  print_matrix(iden);
   print_matrix(i);
   print_matrix(edges);
 
@@ -33,6 +37,10 @@ int main() {
 
   matrix_mult(i, edges);
 
+  print_matrix(edges);
+
+  matrix_mult(iden, edges);
+    
   print_matrix(edges);
   
   free_matrix( edges );
