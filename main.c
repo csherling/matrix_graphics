@@ -26,7 +26,7 @@ int main() {
     }
   }
   ident(iden);
-  printf("\nmatrix name: iden");
+  printf("\n identity matrix: matrix name: iden");
   print_matrix(iden);
   printf("matrix name: i");
   print_matrix(i);
@@ -45,7 +45,7 @@ int main() {
   printf("matrix name: edges");
   print_matrix(edges);
 
-  printf("========matrix multiplying 'iden' and 'edges'========\n");
+  printf("========matrix multiplying identity matrix 'iden' and 'edges'========\n");
   printf("should produce the same answer\n");
   matrix_mult(iden, edges);
 
