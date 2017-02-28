@@ -75,6 +75,11 @@ int main() {
   points = new_matrix(4,4);
   points->lastcol = 0;
 
+  for(r=0;r<4;r++){
+    for(c=0;c<4;c++){
+      points->m[r][c] = 0.0;
+    }
+  }
   
   /* add_point(points,0,0,0); */
   /* add_point(points,100,100,0); */
@@ -84,23 +89,15 @@ int main() {
   /* add_edge(points,300,300,0,300,350,0); */
   /* add_edge(points,400,400,0,350,300,0); */
 
-  int x;
-  double d;
-  for(x = 0; x < 125; x++){
-    /* c.red = x * 2; */
-    /* c.green = (x*c.red+128) % 256; */
-    /* c.blue = (x*c.green) % 256; */
-    add_edge(points, 0,4*x,0, 500 - 4*x, 0,0);
-    add_edge(points, 4*x,500,0, 0,4*x,0);    
-    add_edge(points, 500,500-4*x,0, 4*x,500,0);
-    add_edge(points, 500-4*x,0,0, 500, 500-4*x,0);
-  }
-  
-
-
   add_edge(points, 250, 250, 0, 250, 500, 0);
+  printf("Printing matrix after adding 2 points\n");
+  print_matrix(points);
   add_edge(points, 250, 250, 0, 375, 500, 0);
+  printf("Printing matrix after adding 4 points. Matrix should have grown.\n");
+  print_matrix(points);
   add_edge(points, 250, 250, 0, 500, 500, 0);
+  printf("Printing matrix after adding 6 points\n");
+  print_matrix(points);
   add_edge(points, 250, 250, 0, 500, 375, 0);
   add_edge(points, 250, 250, 0, 500, 250, 0);
   add_edge(points, 250, 250, 0, 500, 125, 0);
@@ -116,7 +113,22 @@ int main() {
   add_edge(points, 250, 250, 0, 125, 500, 0);
 
 
+
+
   draw_lines(points, s, color);
+
+  int x;
+  double d;
+  for(x = 0; x < 125; x++){
+    /* c.red = x * 2; */
+    /* c.green = (x*c.red+128) % 256; */
+    /* c.blue = (x*c.green) % 256; */
+    add_edge(points, 0,4*x,0, 500 - 4*x, 0,0);
+    add_edge(points, 4*x,500,0, 0,4*x,0);    
+    add_edge(points, 500,500-4*x,0, 4*x,500,0);
+    add_edge(points, 500-4*x,0,0, 500, 500-4*x,0);
+  }
+
   
   display(s);
   save_extension(s, "lines.png");
